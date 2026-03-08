@@ -1,3 +1,6 @@
+`default_nettype none
+
+
 module CRC_core (
 
 input wire i_clk,
