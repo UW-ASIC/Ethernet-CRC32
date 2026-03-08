@@ -27,7 +27,7 @@ module tb ();
 `endif
 
   // Instantiate CRC_core:
-  CRC_core (
+  CRC_core uut (
       .i_clk(clk),
       .i_rstn(rst_n),
       .i_8xframe(i_8xframe),
