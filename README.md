@@ -1,23 +1,30 @@
 ![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
 
-# Tiny Tapeout Verilog Project Template
+# UWASIC W26: FCS Engine
 
-- [Read the documentation for project](docs/info.md)
+- Clone this repository and update info.yaml 
+- [Read the documentation here](docs/info.md)
+## Disclaimer
 
-## What is Tiny Tapeout?
-
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
-
-To learn more and get started, visit https://tinytapeout.com.
+The final implementation will be integrated into an FPGA fabric of a larger SoC. This TinyTapeout template serves as a trackable starting point for initial prototyping and team training purposes.
 
 ## Set up your Verilog project
 
 1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Adapt the testbench to your design. See [test/README.md](test/README.md) for more information.
+2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. 
+3. Edit [docs/info.md](docs/info.md) weekly and document your weekly progress on RTL and Verification, along with any comments or concerns you may have.
 
 The GitHub action will automatically build the ASIC files using [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/).
+
+## Writing cocotb Testbenches
+
+This template design has a two-level hierarchy:
+- **`CRC_core`** (submodule): Core CRC computation engine (your main task)
+- **`tt_um_FCS_yourname`** (top module): Wrapper with TinyTapeout standard I/O interfaces
+
+**For now, focus verification efforts on `CRC_core` only.** The testbench instantiates `CRC_core` directly, allowing you to thoroughly verify the core algorithm logic before integrating it into the top module. This approach isolates and tests the critical CRC computation logic first.
+
+> **Note:** If you're more comfortable using Verilog or SystemVerilog testbenches for verification, feel free to use those instead of cocotb.
 
 ## Enable GitHub actions to build the results page
 
@@ -25,17 +32,8 @@ The GitHub action will automatically build the ASIC files using [OpenLane](https
 
 ## Resources
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
+- [Documentation](https://tinytapeout.com/faq/)
+- [An interesting insight on implementing CRC math onto hardware](https://youtu.be/sNkERQlK8j8?si=1aVVNF5dmEeVRrsh)
+- [CRC calculator](https://crccalc.com/?crc=123456789&method=&datatype=ascii&outtype=hex)
+- [UWASIC discord server](https://discord.gg/ZcfXmCkV)
 
-## What next?
-
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
